@@ -10,6 +10,8 @@
 void task1();
 //--------------------------------------
 //Add Components (T2 - Brodie)
+//Adds a resistor, voltage source, or current source
+//Only one source (voltage OR current) is allowed per circuit
 void task2();
 //--------------------------------------
 //Series/Parallel Connection (T3 - Julia)
