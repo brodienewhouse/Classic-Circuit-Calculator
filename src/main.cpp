@@ -21,7 +21,7 @@ int main()
         //Outputting Terminal Options
         cout << "\n--- Simpler Circuit Solver Menu ---\n";
         cout << "1. Help \n";
-        cout << "2. Add Components (resistors, voltage/current sources) \n";
+        cout << "2. Add Components (sources/resistors) \n";
         cout << "3. Series/Parallel Connection \n";
         cout << "4. Calculate V, I, R, P\n";
         cout << "5. Start Front-End Display\n";
