@@ -67,30 +67,4 @@ public:
 
 };
 
-//-------------------------------------
-// CurrentSource Class Declaration (T2 - Georgy)
-// Stores one current source and its values
-// Stores current source that powers the circuit
-class CurrentSource {
-private:
-    string name; // Label for voltage source
-    double current; // Voltage in volts
-
-public:
-    // Constructors
-    CurrentSource(); // Default
-    CurrentSource(string name, double current); // Constructor
-
-    // Getters
-    string getName() const; 
-    double getCurrent() const;
-
-    // Stores changed current
-    void setCurrent(double current);
-
-    // Prints current source info to console
-    void print() const;
-
-};
-//-------------------------------------
 #endif
