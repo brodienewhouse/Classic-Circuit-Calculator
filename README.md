@@ -5,10 +5,10 @@ A C++ calculator that solves **voltage (V), current (I), resistance (R) and powe
 EECE2140 team project. Instructor: Dr. Nafa Fatema.
 
 ## Team
-| Member | Role (Iteration 2) | Tasks |
+| Member | Role (Iteration 3) | Tasks |
 |---|---|---|
-| Brodie Newhouse | Project Leader | T2, T6 |
-| Georgy Rached | Developer | T1, T5 |
+| Brodie Newhouse | Developer | T2, T6 |
+| Georgy Rached | Project Leader | T1, T5 |
 | Julia Terceros | Developer | T3, T4, T6 |
 
 ## Features
