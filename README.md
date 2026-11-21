@@ -1,6 +1,6 @@
 # Classic Circuit Calculator
 
-A C++ calculator that solves **voltage (V), current (I), resistance (R) and power (P)** for simple DC resistor circuits. The user enters a voltage source and resistors, picks **series** or **parallel**, and the program solves for every component.
+A C++ calculator that solves **voltage (V), current (I), resistance (R) and power (P)** for simple DC resistor circuits. The user enters a voltage source or current source and resistors, picks **series** or **parallel**, and the program solves for every component.
 
 EECE2140 team project. Instructor: Dr. Nafa Fatema.
 
@@ -12,7 +12,7 @@ EECE2140 team project. Instructor: Dr. Nafa Fatema.
 | Julia Terceros | Developer | T3, T4, T6 |
 
 ## Features
-- Add a DC voltage source and one or more resistors
+- Add a DC voltage source or current source and one or more resistors
 - Combine resistors in series or parallel
 - Solve V, I, R and P for each resistor using Ohm's law (V = IR) and P = VI
 - Text menu in the terminal (front end for a touch display planned)
