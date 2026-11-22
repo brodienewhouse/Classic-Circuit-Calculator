@@ -6,6 +6,7 @@
 #include <limits>
 #include "tasks.h"
 #include "components.h"
+#include "circuit.h"
 using namespace std;
 
 //--------------------COMPONENT STORAGE-------------------------
