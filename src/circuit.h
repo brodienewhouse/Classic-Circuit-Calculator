@@ -5,7 +5,6 @@
 #ifndef CIRCUIT_H
 #define CIRCUIT_H
 
-#include <vector>
 #include "components.h"
 using namespace std;
 
@@ -20,8 +19,12 @@ using namespace std;
 
 
 class Circuit{
+    public:
+        static const int MAX_RESISTORS = 10; // Max number of resistors the circuit can hold
+
     private:
-        vector<Resistor> resistors; // List of every resistor in the circuit
+        Resistor resistors[MAX_RESISTORS]; // List of every resistor in the circuit
+        int numResistors; // How many resistors have been added
         VoltageSource source;  // Voltage source (used when usesCurrentSource is false)
         CurrentSource currentSource; //Current source (used when usesCurrentSource is true)
         
@@ -33,7 +36,7 @@ class Circuit{
         Circuit(); //Constructor, empty circuit
 
         //Setters
-        void addResistor(const Resistor &r); // Adds resistor to list
+        void addResistor(const Resistor &r); // Adds resistor to list (ignored if full)
         void setSource(const VoltageSource &v); //Sets voltage source to circuit 
         void setCurrentSource(const CurrentSource &I); // Sets a current source (replaces voltage source)
         void setSeries(bool series); //Chooses series or parallel resistors

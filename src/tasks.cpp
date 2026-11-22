@@ -9,12 +9,13 @@
 #include "circuit.h"
 using namespace std;
 
-//--------------------COMPONENT STORAGE-------------------------
-//Temporary storage until the circuit class (circuit.h) is written
+//--------------------CIRCUIT STORAGE-------------------------
+//One circuit shared by every task (task2 adds parts, task3 sets series/parallel, task4 solves)
 //Only one source is allowed per circuit (voltage or current)
-const int MAX_RESISTORS = 10; //max number of allowed resisotrs
-static Resistor resistors[MAX_RESISTORS];
-static int numResistors = 0; 
+static Circuit circuit;
+static int numResistors = 0; //how many resistors have been added (max is Circuit::MAX_RESISTORS)
+
+//copies of the sources so task2 can name the one being replaced
 static VoltageSource voltageSource;
 static CurrentSource currentSource;
 static bool hasVoltageSource = false;
@@ -29,10 +30,27 @@ static void clearInput()
 }
 
 //--------------------------------------
-void task1() 
-{ 
-    cout << "[Help] \n"; 
+//Georgy Rached, Writen with Assistance of Claude Opus 5.5
+void task1()
+{
+    cout << "[Help] \n";
+    cout << "This program solves V, I, R, and P for a simple DC resistor circuit. \n";
+    cout << "Steps: add parts (2), pick series or parallel (3), then calculate (4). \n\n";
 
+    cout << "1. Help: Shows this message. \n";
+    cout << "2. Add Components: Add a resistor (ohms), a voltage source (V), or a current source (A). \n";
+    cout << "   - Up to " << Circuit::MAX_RESISTORS << " resistors. Resistance cannot be negative. \n";
+    cout << "   - Only one source is allowed. Adding a new one replaces the old one. \n";
+    cout << "3. Series/Parallel: Choose how the resistors are connected (series is the default). \n";
+    cout << "4. Calculate V, I, R, P: Solves the circuit and prints the source, equivalent \n";
+    cout << "   resistance, total power, and each resistor's voltage, current, and power. \n";
+    cout << "5. Start Front-End Display: Opens the display version of the program. \n";
+    cout << "6. Run Tests: Runs test circuits with known answers to check the solver. \n";
+    cout << "0. Exit Program: Closes the program. \n\n";
+
+    cout << "Formulas: V = I * R, P = V * I \n";
+    cout << "Series: Req = R1 + R2 + ...      Parallel: 1/Req = 1/R1 + 1/R2 + ... \n";
+    cout << "Only enter numbers for menu choices and values. \n";
 }
 //--------------------------------------
 
@@ -66,9 +84,9 @@ void task2()
             return; //retuns back to main menu
             
         case 1:
-            if (numResistors == MAX_RESISTORS)
+            if (numResistors == Circuit::MAX_RESISTORS)
             {
-                cout << "Circuit is Full (Max " << MAX_RESISTORS << " Resistors) \n";
+                cout << "Circuit is Full (Max " << Circuit::MAX_RESISTORS << " Resistors) \n";
                 return;
             }
             
@@ -107,12 +125,14 @@ void task2()
     }
 
     //--------------------STORE COMPONENT-------------------------
+    //adds the part to the shared circuit
     if (type == 1)
     {
-        resistors[numResistors] = Resistor(name, value);
-        cout << "Added ";
-        resistors[numResistors].print();
+        Resistor r(name, value);
+        circuit.addResistor(r);
         numResistors++;
+        cout << "Added ";
+        r.print();
     }
 
     else if (type == 2)
@@ -123,6 +143,7 @@ void task2()
         }
 
         voltageSource = VoltageSource(name, value);
+        circuit.setSource(voltageSource);
         hasVoltageSource = true;
         hasCurrentSource = false;
         cout << "Added ";
@@ -138,6 +159,7 @@ void task2()
         }
 
         currentSource = CurrentSource(name, value);
+        circuit.setCurrentSource(currentSource);
         hasCurrentSource = true;
         hasVoltageSource = false;
         cout << "Added ";

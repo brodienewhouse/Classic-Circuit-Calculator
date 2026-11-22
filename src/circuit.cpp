@@ -9,6 +9,7 @@ using namespace std;
 
 //-----------------Constructor-----------------
 Circuit::Circuit() {
+    numResistors = 0;
     isSeries = true;
     usesCurrentSource = false;
 }
@@ -16,7 +17,13 @@ Circuit::Circuit() {
 //-----------------Setters-----------------
 //Adds a resistor to the list
 void Circuit::addResistor(const Resistor &r){
-    resistors.push_back(r);
+    if (numResistors == MAX_RESISTORS){
+        cout << "Error: Circuit is full (Max " << MAX_RESISTORS << " resistors)." << endl;
+        return;
+    }
+
+    resistors[numResistors] = r;
+    numResistors++;
 }
 
 //Sets a voltage source (replaces current source)
@@ -44,12 +51,12 @@ double Circuit::equivalentResistance() const {
     double total = 0;
 
     //Req is calcualted based on whether the resistors and in parallel or series
-    if (resistors.size() == 0){
+    if (numResistors == 0){
         return 0;
     } 
 
     //Add up R (series) or 1/R (parallel) for every resistor
-    for (int i = 0; i < resistors.size(); i++){
+    for (int i = 0; i < numResistors; i++){
         double R = resistors[i].getResistance();
 
         if (isSeries) {
@@ -76,7 +83,7 @@ void Circuit::solve(){
     double totalVoltage;
 
     //Checks if there are resistors, 
-    if (resistors.size() == 0){
+    if (numResistors == 0){
         cout << "Error:No resistors in circuit." << endl;
         return;
 
@@ -102,7 +109,7 @@ void Circuit::solve(){
 
 
     //Will go through each resistor, and solve the voltage and current
-    for (int i = 0; i < resistors.size(); i++) {
+    for (int i = 0; i < numResistors; i++) {
         double R = resistors[i].getResistance();
 
         if (isSeries){
@@ -152,7 +159,7 @@ void Circuit::printResults() const {
 
     //Print each resistor and their traits
     cout << "\n***Resistors***" << endl;
-    for (int i = 0; i < resistors.size(); i++) {
+    for (int i = 0; i < numResistors; i++) {
         resistors[i].print();
     }
 
